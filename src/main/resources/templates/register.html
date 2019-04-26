@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>英语教学系统</title>
+    <link rel="stylesheet" href="static/css/common_form.css">
+    
+</head>
+<body>
+    <header>
+        <div class="header-line"></div>
+    </header>
+    <div class="content">
+        <img class="content-logo" src="static/img/form_logo.png" alt="logo">
+        <h1 class="content-title">创建账户</h1>
+        <div class="content-form">
+                <div id="change_margin_1">
+                    <input id="user" class="user" type="text" name="user" placeholder="请输入用户名">
+                </div>
+                <!-- input的value为空时弹出提醒 -->
+                <p id="remind_1"></p>
+                <div id="change_margin_2">
+                    <input id="password" class="password" type="password" name="password" placeholder="请输入密码">
+                </div>
+                <p id="remind_1"></p>
+                <div id="change_margin_2">
+                    <input id="nickname" class="nickname" type="text" name="nickname" placeholder="请输入昵称">
+                </div>
+                <div class="change_margin_3">
+				    <select id="persontype" class="persontype">
+				      <option value="0">学生</option>
+                    	<option value="1">老师</option>
+				    </select>
+				 </div>
+                <!-- input的value为空时弹出提醒 -->
+                <p id="remind_2"></p>
+                <div id="change_margin_3">
+                    <input id="register" class="content-form-signup" type="button" value="创建账户">
+                </div>
+        </div>
+        <div class="content-login-description">已经拥有账户？</div>
+        <div><a class="content-login-link" href="login.html">登录</a></div>
+    </div>
+<script src="static/js/common_form_test.js"></script>
+<script src="static/js/jquery-2.2.3.js"></script>
+<script>
+$(function() {
+	$("#register").click(function(){
+		register();
+	});
+});
+
+function register(){
+	var data ={"userName":$("#user").val(),"password":$("#password").val(),"nickname":$("#nickname").val(),"userType":$("#persontype").val()};
+	$.ajax({
+		url : "user/addUser",//请求的url
+		type : "post",//请求方式
+		data : JSON.stringify(data),
+		dataType : "json",//后台数据返回类型
+		contentType : "application/json",
+		success : function(data) {//响应成功执行的方法
+			if (data.status=="SUCCESS") {
+				window.location.href='login.html';
+			} else {
+				alert("用户名或者密码不正确");
+			}
+		},
+		error : function() {//出现异常执行方法
+			alert("出现异常啦...");
+		}
+	});
+}
+</script>
+</body>
+</html>

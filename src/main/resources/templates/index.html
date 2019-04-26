@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="static/js/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function (){
+	var data = {"id":7};
+	$.ajax({
+		url : "user/getUserById",
+		type : "post",
+		contentType: "application/json;charset=utf-8",
+		data : JSON.stringify(data),
+		dataType : "json",
+		success : function(res) {
+			$('#pic').attr("src",res.rows.pic);
+		}
+	});
+
+});
+</script>
+</head>
+<body>
+	<img id="pic" alt="图片" src="">
+</body>
+</html>
